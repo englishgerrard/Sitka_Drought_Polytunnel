@@ -1,4 +1,4 @@
-evaluate_model <- function(x = 1){
+evaluate_model <- function(x = 1, y = 5){
   
   index$clone <- as.factor(index$clone)
   
@@ -58,7 +58,7 @@ evaluate_model <- function(x = 1){
                                            p1, p2, p3, p4, p5, p6, p7)
   
   
-  top_mods <-  performace_stats %>%  slice_max(n = 5, AIC_wt)
+  top_mods <-  performace_stats %>%  slice_max(n = y, AIC_wt)
   bestMod <- modlist[[top_mods[x,1]]]
   print(top_mods)
   return(bestMod)}
