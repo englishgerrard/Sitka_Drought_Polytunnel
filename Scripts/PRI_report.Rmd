@@ -1,0 +1,121 @@
+---
+title: "PRI_report"
+output: html_document
+date: "2025-05-01"
+editor_options: 
+  chunk_output_type: console
+---
+## PRI model report
+```{r setup, include=FALSE}
+library(here)
+setwd(here())
+source('./Scripts/.PACKAGES.R')
+mod <- readRDS('./PRI.RDS')
+index <- read.csv('./Data/Index.csv') %>%
+  filter(branch == 'top') %>% filter(days < 59)
+
+data <- index
+data$treatment <- as.factor(data$treatment)
+data$clone <- factor(data$clone, labels = c('c1', 'c2','c3','c4','c5','c6'))
+contrasts(data$clone) <- contr.sum(levels(data$clone))
+data$days_scaled <- drop(scale(data$days))
+
+posterior_samples <- posterior_samples(mod)
+
+```
+
+Posterior predictive checks allow you to compare the observed data to data simulated from the model. This can help you assess how well the model captures the data.
+
+```{r}
+pp_check(mod)
+```
+Trace plots help you visualize the convergence of the Markov Chain Monte Carlo (MCMC) chains. You can use the `plot()` function to generate trace plots for the parameters.
+
+```{r}
+# traceplots 
+plot(mod)
+```
+Rhat values (also known as the potential scale reduction factor) indicate whether the chains have converged. Values close to 1 suggest good convergence. You can check Rhat values in the model summary.
+```{r}
+# Check Rhat values
+rhat_values <- summary(mod)$fixed[, "Rhat"]
+print(rhat_values)
+# Random effects diagnostics
+#ranef(mod)
+```
+Divergent transitions can indicate problems with the model specification or the priors. You can check for divergent transitions using the summary() function or by plotting the model.
+```{r}
+# Check for divergent transitions
+summary(mod)$diagnostics
+```
+
+the fitted v modeled predictions
+```{r}
+# Visualize predictions
+predictions <- fitted(mod)
+plot(data$PRI, predictions[,1], main = "Observed vs Fitted", xlab = "Observed", ylab = "Fitted")
+abline(0, 1, col = "red")  # Add a 45-degree line
+```
+
+```{r, fixed effects}
+fixed_effects <- posterior_samples %>%
+  select(!starts_with("b_")) %>%  # Select all fixed effects (starts with "b_")
+  pivot_longer(cols = everything(), names_to = "effect", values_to = "estimate") 
+
+fixed_effects
+```
+
+
+
+```{r include=FALSE}
+em_week <- emmeans(
+  mod, 
+  specs = pairwise ~ treatment | days_scaled,
+  at = list(days_scaled = seq(min(data$days_scaled), 
+                              max(data$days_scaled), 
+                              length = 8))  # Evaluates at original weeks
+)
+
+em_clone_week <- emmeans(
+  mod, 
+  specs = pairwise ~ treatment | days_scaled | clone,
+  at = list(days_scaled = seq(min(data$days_scaled), 
+                              max(data$days_scaled), 
+                              length = 8))  # Evaluates at original weeks
+)
+```
+
+
+
+
+
+
+
+
+
+# plots over time 
+```{r}
+# Plot treatment differences
+plot(em_week$contrasts) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(title = "Drought vs. Control: Weekly Contrasts",
+       y = "PRI Difference (Drought - Control)")
+```
+Figure: drought effect over time
+
+```{r}
+contrasts_df <- as.data.frame(em_clone_week$contrasts)
+ggplot(contrasts_df, aes(x = days_scaled, y = estimate, color = contrast)) +
+  geom_point() +
+  geom_line() +
+  geom_errorbar(aes(ymin = lower.HPD, ymax = upper.HPD), width = 0.2) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(title = "Drought vs. Control: Weekly Contrasts by Clone",
+       y = "PRI Difference (Drought - Control)",
+       x = "Days Scaled") +
+  facet_wrap(~ clone) +  # Facet by clone
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+Figure: drought effect over time by clone
+
