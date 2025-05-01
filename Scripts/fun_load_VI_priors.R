@@ -11,7 +11,7 @@ priors_list <- list(
   ARI2 = c(set_prior("normal(0, 2)", class = "b"), set_prior("normal(0, 2)", class = "sd")),
   CRI1 = c(set_prior("normal(6.5, 5)", class = "b"), set_prior("normal(0, 5)", class = "sd")),    # test
   CRI2 = c(set_prior("normal(6.5, 5)", class = "b"), set_prior("normal(0, 5)", class = "sd")),    # test
-  PRI = c(set_prior("normal(0, 0.08)", class = "b"), set_prior("normal(0, 0.2)", class = "sd")),     # test 
+  PRI = c(set_prior("normal(0.2, 0.08)", class = "b"), set_prior("normal(0, 0.2)", class = "sd")),     # test 
   
   MSI = c(set_prior("normal(0.3, 0.2)", class = "b"), set_prior("normal(0, 0.2)", class = "sd")),     # test
   NDWI1 = c(set_prior("normal(0.7, 0.2)", class = "b"), set_prior("normal(0, 0.2)", class = "sd")),   # test
@@ -20,3 +20,5 @@ priors_list <- list(
   WI = c(set_prior("normal(1.1, 0.2)", class = "b"), set_prior("normal(0, 0.2)", class = "sd")),      # test
   WI_NDVI = c(set_prior("normal(1.3, 0.2)", class = "b"), set_prior("normal(0, 0.2)", class = "sd"))  # test
   )
+
+

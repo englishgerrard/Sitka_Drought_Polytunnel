@@ -14,7 +14,7 @@ data$days_scaled <- drop(scale(data$days))
 
 fit_model <- function(dependent_var, priors) {
   # Create the formula for the model
-  formula <- as.formula(paste(dependent_var, "~ treatment * poly(days_scaled,2) * clone + (1 + days_scaled | id)"))
+  formula <- as.formula(paste(dependent_var, "~ treatment * poly(days_scaled, 3) * clone + (1 + days_scaled | id)"))
   
   # Fit the model using brms
   model <- brm(
@@ -25,7 +25,7 @@ fit_model <- function(dependent_var, priors) {
     chains = 4,
     iter = 4000,
     cores = 6,
-    file = paste0('./',dependent_var,'.rds')
+    file = paste0('./',dependent_var,'_poly3.rds')
     #silent = TRUE
   )
   
@@ -59,9 +59,9 @@ model_summaries <- lapply(seq_along(dependent_vars), function(i) {
     )
   )
 })
-time.taken <- (Sys.time() - start.time)
+#time.taken <- (Sys.time() - start.time)
 pbPost("note", title = "R Alert", body = paste("script finished @", Sys.time(),
-                                               "time elapsed = ", time.taken, 'mins'))
+                                               "time elapsed = ", time.taken, 'mins 💃'))
 # Name the list elements with the dependent variable names
 names(model_summaries) <- dependent_vars
 

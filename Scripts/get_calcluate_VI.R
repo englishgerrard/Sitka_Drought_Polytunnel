@@ -41,6 +41,7 @@ index$CIgr <- (b$R750/b$R550)-1 # Green chlorophyll index (CIgreen) Gitelson et 
 index$CIre <- (b$R750/b$R710)-1 # Red edge chlorophyll index (CIred edge) Gitelson et al 2005
 index$NDVI <- (b$R800 - b$R670)/ (b$R800 + b$R670) # Rouse et al 1973
 index$NRVIre <- (b$R750 - b$R710)/ (b$R750 + b$R710) # Red edge normalized ratio (NRred edge) Gitelson et al 1996
+index$SR <- (b$R800/ b$R670)
 
 # stress pigment VI
 

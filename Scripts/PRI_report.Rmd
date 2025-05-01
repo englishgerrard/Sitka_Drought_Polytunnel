@@ -1,6 +1,8 @@
 ---
-title: "PRI_report"
-output: html_document
+title: "NDVI_poly_report"
+output: 
+  html_document: 
+    fig_caption: true
 date: "2025-05-01"
 editor_options: 
   chunk_output_type: console
@@ -10,7 +12,7 @@ editor_options:
 library(here)
 setwd(here())
 source('./Scripts/.PACKAGES.R')
-mod <- readRDS('./PRI.RDS')
+mod <- readRDS('./NDVI.rds')
 index <- read.csv('./Data/Index.csv') %>%
   filter(branch == 'top') %>% filter(days < 59)
 
@@ -62,7 +64,10 @@ fixed_effects <- posterior_samples %>%
   select(!starts_with("b_")) %>%  # Select all fixed effects (starts with "b_")
   pivot_longer(cols = everything(), names_to = "effect", values_to = "estimate") 
 
-fixed_effects
+sum_mod <- summary(mod)
+sum_df <- as.data.frame(as.data.frame(sum_mod$fixed)) 
+sum_df$noEffect <- (sum_df$`l-95% CI` <= 0 & sum_df$`u-95% CI`>=0)
+print(sum_df)  
 ```
 
 
