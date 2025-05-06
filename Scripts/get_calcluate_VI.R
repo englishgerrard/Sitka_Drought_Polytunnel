@@ -64,6 +64,6 @@ index$WI_NDVI <- index$WI/ index$NDVI # WI normalised by NDVI # Penuelas et al 1
 
 index$collection_time <- ymd_hms(index$collection_time)
 index$Time <- format(as.POSIXct(index$collection_time), format = '%H:%M:%S')
-index$id <- paste(index$clone, index$clone_num)
+index$id <- paste(index$treatment, index$clone, index$clone_num)
 
 write.csv(index, './Data/Index.csv')

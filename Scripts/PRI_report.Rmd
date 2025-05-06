@@ -12,7 +12,7 @@ editor_options:
 library(here)
 setwd(here())
 source('./Scripts/.PACKAGES.R')
-mod <- readRDS('./NDVI.rds')
+mod <- readRDS('./models/NDVI.rds')
 index <- read.csv('./Data/Index.csv') %>%
   filter(branch == 'top') %>% filter(days < 59)
 
@@ -55,7 +55,7 @@ the fitted v modeled predictions
 ```{r}
 # Visualize predictions
 predictions <- fitted(mod)
-plot(data$PRI, predictions[,1], main = "Observed vs Fitted", xlab = "Observed", ylab = "Fitted")
+plot(data$NDVI, predictions[,1], main = "Observed vs Fitted", xlab = "Observed", ylab = "Fitted")
 abline(0, 1, col = "red")  # Add a 45-degree line
 ```
 
