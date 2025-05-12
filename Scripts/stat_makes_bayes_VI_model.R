@@ -1,4 +1,5 @@
-source('./Scripts/.PACKAGES.R')
+source('./Scripts/_PACKAGES.R')
+source('./Scripts/_FUNCTIONS.R')
 # Defined a list of priors for each dependent variable
 source('./Scripts/fun_load_VI_priors.R')
 
@@ -8,13 +9,13 @@ index <- read.csv('./Data/Index.csv') %>%
 data <- index
 data$treatment <- as.factor(data$treatment)
 data$clone <- factor(data$clone, labels = c('c1', 'c2','c3','c4','c5','c6'))
-contrasts(data$clone) <- contr.sum(levels(data$clone))
+#contrasts(data$clone) <- contr.sum(levels(data$clone))
 data$days_scaled <- drop(scale(data$days))
 
 
 fit_model <- function(dependent_var, priors) {
   # Create the formula for the model
-  formula <- as.formula(paste(dependent_var, "~ treatment * poly(days_scaled,3) * clone + (1 + days_scaled | id)"))
+  formula <- as.formula(paste(dependent_var, "~ treatment * poly(days_scaled,2) * clone + (1 + days_scaled | id)"))
   
   # Fit the model using brms
   model <- brm(
@@ -25,12 +26,12 @@ fit_model <- function(dependent_var, priors) {
     chains = 4,
     iter = 4000,
     cores = 8,
-    file = paste0('./models/',dependent_var,'_poly3.rds'),
+    file = paste0('./models/',dependent_var,'_poly_diff_contr.rds'),
     
     #silent = TRUE
   )
   
-  pbPost("note", title = "R Alert", body = paste(dependent_var, 'model run 💃'))
+  #pbPost("note", title = "R Alert", body = paste(dependent_var, 'model run 💃'))
   # Return the model summary
   return(model)
 }

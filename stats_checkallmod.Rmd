@@ -1,0 +1,75 @@
+---
+title: "model_checks"
+output: html_document
+date: "2025-05-08"
+---
+
+```{r setup, include=FALSE}
+source('./Scripts/_PACKAGES.R')
+source('./Scripts/_FUNCTIONS.R')
+knitr::opts_chunk$set(echo = TRUE)
+dependent_vars <- 
+  c('CCI', 'CIgr', 'CIre', 'NDVI', 'NRVIre', 'SR',
+    'ARI1', 'ARI2', 'CRI1', 'CRI2', 'PRI',
+    'MSI', 'NDWI1', 'NDWI2', 'SRWI', 'WI', 'WI_NDVI')
+```
+
+```{r}
+
+for(i in 1:17){
+  
+VI <- dependent_vars[i]
+mod <- readRDS(paste0('./models/',VI,'_poly2.rds'))
+
+print(VI)
+print(pp_check(mod))
+print(mcmc_plot(mod,type = "rhat"))
+}
+
+```
+```{r}
+for(i in 1:17){
+  mod <- readRDS(paste0('./models/',dependent_vars[i],'_poly2.rds'))
+ 
+em_week <- emmeans(
+  mod, 
+  specs = pairwise ~ treatment | days_scaled,
+  at = list(days_scaled = seq(min(data$days_scaled), 
+                              max(data$days_scaled), 
+                              length = 8))  # Evaluates at original weeks
+)
+
+# Plot treatment differences
+p1 <- plot(em_week$contrasts) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(title = "Drought vs. Control: Weekly Contrasts",
+       y = "VI Difference (Drought - Control)")
+
+em_clone <- emmeans(
+  mod, 
+  specs = pairwise ~ treatment | days_scaled| clone,
+  at = list(days_scaled = seq(min(data$days_scaled), 
+                              max(data$days_scaled), 
+                              length = 8))  # Evaluates at original weeks
+)
+
+contrasts_df <- as.data.frame(em_clone$contrasts)
+p2 <- ggplot(contrasts_df, aes(x = days_scaled, y = estimate, color = contrast)) +
+  geom_point() +
+  geom_line() +
+  geom_errorbar(aes(ymin = lower.HPD, ymax = upper.HPD), width = 0.2) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(title = "Drought vs. Control: Weekly Contrasts by Clone",
+       y = "VI Difference (Drought - Control)",
+       x = "Days Scaled") +
+  facet_wrap(~ clone) +  # Facet by clone
+  theme_minimal() +
+  #annotate("text", x=1, y=1, label= annotate("text", label= dependent_vars[i]))+
+  theme(legend.position = "bottom")
+ print(dependent_vars[i])
+print(p1)
+print(p2)
+}
+
+```
+
