@@ -30,7 +30,7 @@ for each VI
 ## plots
 - model checks - adjuts priors if needed
 - t0 plots - treatment and clone at 0 
-- drought effect over time
+- VI effect over time
 
 # results plots 
 - drought effect over time (poly and lin)
@@ -40,3 +40,9 @@ for each VI
 
 
 additional - at time 0 do the clones differ
+
+
+# notes 
+the clone 6 error is generally larger becuse 
+Zero-Sum Constraints: In a zero-sum contrast, the effects of the different levels (in this case, clones) are constrained such that their sum equals zero. This means that if one clone's effect is estimated to be larger, the others must compensate by being smaller. If the estimates for the other clones are relatively stable, the estimate for clone 6 may have more variability as it is derived from the sum of the other clones' effects. This can lead to wider credible intervals.
+Model Uncertainty: The estimation of the effect for clone 6 is dependent on the estimates of the other clones. If there is uncertainty in the estimates of clones 1 to 5, this uncertainty propagates to the estimate for clone 6, potentially leading to a larger CI.

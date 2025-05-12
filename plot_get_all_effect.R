@@ -8,9 +8,9 @@ dependent_vars <-
     'MSI', 'NDWI1', 'NDWI2', 'SRWI', 'WI', 'WI_NDVI')
 
 # read mod
-VI <- dependent_vars[11]
+VI <- dependent_vars[5]
 
-mod <- readRDS(paste0('./models/',VI,'_poly2.rds'))
+mod <- readRDS(paste0('./models/',VI,'_poly2.2.rds'))
 
 index <- read.csv('./Data/Index.csv') %>%
   filter(branch == 'top') %>% filter(days < 59)
@@ -87,6 +87,9 @@ fixed_effects <-  pos %>%
     lower = quantile(estimate, lwr_ci),
     upper = quantile(estimate, upr_ci),
     estimate_mean = mean(estimate)) 
+
+saveRDS(posterior_samples, './Data/VI/VI_posterior_samples.rds')
+write.csv(fixed_effects, './Data/VI/VI_fixed_effect.csv')
 
 ggplot(fixed_effects, aes(x = estimate_mean, y = model_term)) +
   geom_point() +
