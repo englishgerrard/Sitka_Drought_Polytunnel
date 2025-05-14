@@ -1,0 +1,30 @@
+---
+title: "results draft"
+output: html_document
+date: "2025-05-14"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source('./Scripts/_PACKAGES.R')
+source('./Scripts/_FUNCTIONS.R')
+
+```
+## Results 
+
+# drought effects over time 
+```{r}
+source('./Scripts/plot_drought_effects.R')
+print(p3)
+
+
+```
+
+
+```{r}
+source('./Scripts/plot_all_VI.R')
+print(gp)
+print(pp)
+print(wp)
+```
+

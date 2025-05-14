@@ -4,7 +4,7 @@ index <- read.csv('./Data/Index.csv') %>%
 
 # Define the list of dependent variables
 dependent_vars <- 
-  c('CCI', 'CIgr', 'CIre', 'NDVI', 'NRVIre', 'SR',
+  c('CIgr', 'CIre', 'NDVI', 'NRVIre', 'SR', 'CCI', 
     'ARI1', 'ARI2', 'CRI1', 'CRI2', 'PRI',
     'MSI', 'NDWI1', 'NDWI2', 'SRWI', 'WI', 'WI_NDVI')
 
