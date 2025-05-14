@@ -20,23 +20,6 @@ posterior_samples$b_clone6 <- -(
     posterior_samples$b_clone5
 )
 
-posterior_samples$b_clone1_abs <- posterior_samples$b_Intercept + posterior_samples$b_clone1 
-posterior_samples$b_clone2_abs <- posterior_samples$b_Intercept + posterior_samples$b_clone2 
-posterior_samples$b_clone3_abs <- posterior_samples$b_Intercept + posterior_samples$b_clone3 
-posterior_samples$b_clone4_abs <- posterior_samples$b_Intercept + posterior_samples$b_clone4 
-posterior_samples$b_clone5_abs <- posterior_samples$b_Intercept + posterior_samples$b_clone5  
-posterior_samples$b_clone6_abs <- posterior_samples$b_Intercept + posterior_samples$b_clone6 
-
-posterior_samples$b_ave_clone <- (
-  posterior_samples$b_clone1 + 
-  posterior_samples$b_clone2 + 
-  posterior_samples$b_clone3 + 
-  posterior_samples$b_clone4 + 
-  posterior_samples$b_clone5 +
-  posterior_samples$b_clone6)/6
-
-
-
 # calculate posterior for clone effect over time poly1
 
 posterior_samples$`b_polydays_scaled21:clone6` <- -(
@@ -46,24 +29,6 @@ posterior_samples$`b_polydays_scaled21:clone6` <- -(
     posterior_samples$`b_polydays_scaled21:clone4` + 
     posterior_samples$`b_polydays_scaled21:clone5`
 )
-
-posterior_samples$`b_polydays_scaled21:clone1_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled21:clone1` 
-posterior_samples$`b_polydays_scaled21:clone2_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled21:clone2` 
-posterior_samples$`b_polydays_scaled21:clone3_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled21:clone3` 
-posterior_samples$`b_polydays_scaled21:clone4_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled21:clone4` 
-posterior_samples$`b_polydays_scaled21:clone5_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled21:clone5` 
-posterior_samples$`b_polydays_scaled21:clone6_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled21:clone6` 
-
-posterior_samples$`b_polydays_scaled21:ave_clone` <- (
-  posterior_samples$`b_polydays_scaled21:clone1` + 
-    posterior_samples$`b_polydays_scaled21:clone2` + 
-    posterior_samples$`b_polydays_scaled21:clone3` + 
-    posterior_samples$`b_polydays_scaled21:clone4` + 
-    posterior_samples$`b_polydays_scaled21:clone5` +
-    posterior_samples$`b_polydays_scaled21:clone6`)/6
-
-
-
 
 # calculate posterior for clone effect over time poly2
 #######################################################
@@ -75,27 +40,7 @@ posterior_samples$`b_polydays_scaled22:clone6` <- -(
     posterior_samples$`b_polydays_scaled22:clone5`
 )
 
-posterior_samples$`b_polydays_scaled22:clone1_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled22:clone1` 
-posterior_samples$`b_polydays_scaled22:clone2_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled22:clone2` 
-posterior_samples$`b_polydays_scaled22:clone3_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled22:clone3` 
-posterior_samples$`b_polydays_scaled22:clone4_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled22:clone4` 
-posterior_samples$`b_polydays_scaled22:clone5_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled22:clone5` 
-posterior_samples$`b_polydays_scaled22:clone6_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled22:clone6` 
-
-posterior_samples$`b_polydays_scaled22:ave_clone` <- (
-  posterior_samples$`b_polydays_scaled22:clone1` + 
-    posterior_samples$`b_polydays_scaled22:clone2` + 
-    posterior_samples$`b_polydays_scaled22:clone3` + 
-    posterior_samples$`b_polydays_scaled22:clone4` + 
-    posterior_samples$`b_polydays_scaled22:clone5` +
-    posterior_samples$`b_polydays_scaled22:clone6`)/6
-#######################################################
-
-
-
-
 # calculate posterior for treatment effect over time poly1
-
 #######################################################
 posterior_samples$`b_treatmentD:polydays_scaled21:clone6` <- -(
   posterior_samples$`b_treatmentD:polydays_scaled21:clone1` + 
@@ -104,22 +49,6 @@ posterior_samples$`b_treatmentD:polydays_scaled21:clone6` <- -(
     posterior_samples$`b_treatmentD:polydays_scaled21:clone4` + 
     posterior_samples$`b_treatmentD:polydays_scaled21:clone5`
 )
-
-posterior_samples$`b_treatmentD:polydays_scaled21:clone1_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled21:clone1` 
-posterior_samples$`b_treatmentD:polydays_scaled21:clone2_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled21:clone2` 
-posterior_samples$`b_treatmentD:polydays_scaled21:clone3_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled21:clone3` 
-posterior_samples$`b_treatmentD:polydays_scaled21:clone4_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled21:clone4` 
-posterior_samples$`b_treatmentD:polydays_scaled21:clone5_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled21:clone5` 
-posterior_samples$`b_treatmentD:polydays_scaled21:clone6_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled21:clone6` 
-
-posterior_samples$`b_treatmentD:polydays_scaled21:ave_clone` <- (
-  posterior_samples$`b_treatmentD:polydays_scaled21:clone1` + 
-    posterior_samples$`b_treatmentD:polydays_scaled21:clone2` + 
-    posterior_samples$`b_treatmentD:polydays_scaled21:clone3` + 
-    posterior_samples$`b_treatmentD:polydays_scaled21:clone4` + 
-    posterior_samples$`b_treatmentD:polydays_scaled21:clone5` +
-    posterior_samples$`b_treatmentD:polydays_scaled21:clone6`)/6
-#######################################################
 
 # calculate posterior for treatment effect over time poly2
 #######################################################
@@ -130,22 +59,6 @@ posterior_samples$`b_treatmentD:polydays_scaled22:clone6` <- -(
     posterior_samples$`b_treatmentD:polydays_scaled22:clone4` + 
     posterior_samples$`b_treatmentD:polydays_scaled22:clone5`
 )
-
-posterior_samples$`b_treatmentD:polydays_scaled22:clone1_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled22:clone1` 
-posterior_samples$`b_treatmentD:polydays_scaled22:clone2_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled22:clone2` 
-posterior_samples$`b_treatmentD:polydays_scaled22:clone3_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled22:clone3` 
-posterior_samples$`b_treatmentD:polydays_scaled22:clone4_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled22:clone4` 
-posterior_samples$`b_treatmentD:polydays_scaled22:clone5_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled22:clone5` 
-posterior_samples$`b_treatmentD:polydays_scaled22:clone6_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled22:clone6` 
-
-posterior_samples$`b_treatmentD:polydays_scaled22:ave_clone` <- (
-  posterior_samples$`b_treatmentD:polydays_scaled22:clone1` + 
-    posterior_samples$`b_treatmentD:polydays_scaled22:clone2` + 
-    posterior_samples$`b_treatmentD:polydays_scaled22:clone3` + 
-    posterior_samples$`b_treatmentD:polydays_scaled22:clone4` + 
-    posterior_samples$`b_treatmentD:polydays_scaled22:clone5` +
-    posterior_samples$`b_treatmentD:polydays_scaled22:clone6`)/6
-#######################################################
 
 
 fixed_effects <-  posterior_samples %>%
@@ -166,6 +79,105 @@ print(p1)
 
 saveRDS(posterior_samples, paste0('./Data/VI/',VI,'_posterior_samples2.rds'))
 write.csv(fixed_effects, paste0('./Data/VI/',VI,'_fixed_effects2.csv'))
+
+
+
+
+# ### archive code for absolute values 
+# posterior_samples$b_clone1_abs <- posterior_samples$b_Intercept + posterior_samples$b_clone1 
+# posterior_samples$b_clone2_abs <- posterior_samples$b_Intercept + posterior_samples$b_clone2 
+# posterior_samples$b_clone3_abs <- posterior_samples$b_Intercept + posterior_samples$b_clone3 
+# posterior_samples$b_clone4_abs <- posterior_samples$b_Intercept + posterior_samples$b_clone4 
+# posterior_samples$b_clone5_abs <- posterior_samples$b_Intercept + posterior_samples$b_clone5  
+# posterior_samples$b_clone6_abs <- posterior_samples$b_Intercept + posterior_samples$b_clone6 
+# 
+# posterior_samples$b_ave_clone <- (
+#   posterior_samples$b_clone1 + 
+#   posterior_samples$b_clone2 + 
+#   posterior_samples$b_clone3 + 
+#   posterior_samples$b_clone4 + 
+#   posterior_samples$b_clone5 +
+#   posterior_samples$b_clone6)/6
+# 
+# 
+# 
+# 
+# 
+# posterior_samples$`b_polydays_scaled21:clone1_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled21:clone1` 
+# posterior_samples$`b_polydays_scaled21:clone2_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled21:clone2` 
+# posterior_samples$`b_polydays_scaled21:clone3_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled21:clone3` 
+# posterior_samples$`b_polydays_scaled21:clone4_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled21:clone4` 
+# posterior_samples$`b_polydays_scaled21:clone5_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled21:clone5` 
+# posterior_samples$`b_polydays_scaled21:clone6_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled21:clone6` 
+# 
+# posterior_samples$`b_polydays_scaled21:ave_clone` <- (
+#   posterior_samples$`b_polydays_scaled21:clone1` + 
+#     posterior_samples$`b_polydays_scaled21:clone2` + 
+#     posterior_samples$`b_polydays_scaled21:clone3` + 
+#     posterior_samples$`b_polydays_scaled21:clone4` + 
+#     posterior_samples$`b_polydays_scaled21:clone5` +
+#     posterior_samples$`b_polydays_scaled21:clone6`)/6
+# 
+# 
+# 
+# 
+# 
+# 
+# posterior_samples$`b_polydays_scaled22:clone1_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled22:clone1` 
+# posterior_samples$`b_polydays_scaled22:clone2_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled22:clone2` 
+# posterior_samples$`b_polydays_scaled22:clone3_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled22:clone3` 
+# posterior_samples$`b_polydays_scaled22:clone4_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled22:clone4` 
+# posterior_samples$`b_polydays_scaled22:clone5_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled22:clone5` 
+# posterior_samples$`b_polydays_scaled22:clone6_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_polydays_scaled22:clone6` 
+# 
+# posterior_samples$`b_polydays_scaled22:ave_clone` <- (
+#   posterior_samples$`b_polydays_scaled22:clone1` + 
+#     posterior_samples$`b_polydays_scaled22:clone2` + 
+#     posterior_samples$`b_polydays_scaled22:clone3` + 
+#     posterior_samples$`b_polydays_scaled22:clone4` + 
+#     posterior_samples$`b_polydays_scaled22:clone5` +
+#     posterior_samples$`b_polydays_scaled22:clone6`)/6
+# #######################################################
+# 
+# 
+# 
+# 
+# 
+# 
+# posterior_samples$`b_treatmentD:polydays_scaled21:clone1_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled21:clone1` 
+# posterior_samples$`b_treatmentD:polydays_scaled21:clone2_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled21:clone2` 
+# posterior_samples$`b_treatmentD:polydays_scaled21:clone3_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled21:clone3` 
+# posterior_samples$`b_treatmentD:polydays_scaled21:clone4_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled21:clone4` 
+# posterior_samples$`b_treatmentD:polydays_scaled21:clone5_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled21:clone5` 
+# posterior_samples$`b_treatmentD:polydays_scaled21:clone6_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled21:clone6` 
+# 
+# posterior_samples$`b_treatmentD:polydays_scaled21:ave_clone` <- (
+#   posterior_samples$`b_treatmentD:polydays_scaled21:clone1` + 
+#     posterior_samples$`b_treatmentD:polydays_scaled21:clone2` + 
+#     posterior_samples$`b_treatmentD:polydays_scaled21:clone3` + 
+#     posterior_samples$`b_treatmentD:polydays_scaled21:clone4` + 
+#     posterior_samples$`b_treatmentD:polydays_scaled21:clone5` +
+#     posterior_samples$`b_treatmentD:polydays_scaled21:clone6`)/6
+# #######################################################
+# 
+# 
+# posterior_samples$`b_treatmentD:polydays_scaled22:clone1_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled22:clone1` 
+# posterior_samples$`b_treatmentD:polydays_scaled22:clone2_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled22:clone2` 
+# posterior_samples$`b_treatmentD:polydays_scaled22:clone3_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled22:clone3` 
+# posterior_samples$`b_treatmentD:polydays_scaled22:clone4_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled22:clone4` 
+# posterior_samples$`b_treatmentD:polydays_scaled22:clone5_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled22:clone5` 
+# posterior_samples$`b_treatmentD:polydays_scaled22:clone6_abs` <- posterior_samples$b_Intercept + posterior_samples$`b_treatmentD:polydays_scaled22:clone6` 
+# 
+# posterior_samples$`b_treatmentD:polydays_scaled22:ave_clone` <- (
+#   posterior_samples$`b_treatmentD:polydays_scaled22:clone1` + 
+#     posterior_samples$`b_treatmentD:polydays_scaled22:clone2` + 
+#     posterior_samples$`b_treatmentD:polydays_scaled22:clone3` + 
+#     posterior_samples$`b_treatmentD:polydays_scaled22:clone4` + 
+#     posterior_samples$`b_treatmentD:polydays_scaled22:clone5` +
+#     posterior_samples$`b_treatmentD:polydays_scaled22:clone6`)/6
+# #######################################################
+
+
 
 
 # em_clone <- emmeans(

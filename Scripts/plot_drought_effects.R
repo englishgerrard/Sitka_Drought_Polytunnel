@@ -79,5 +79,5 @@ ggplot(treatment, aes(x = estimate_mean, y = VI , colour = contains_zero)) +
     geom_errorbarh(aes(xmin = lower, xmax = upper)) # +
   xlim(-.5, .5)
   
-  # and i think... this is the overall effect of each clone (this really needs checking)
-  # the calulations are in the generat posteriors script..
+  # the absolute params are just interecept + coef  and intercept is the average clone so the cacluations in
+  # generate posteriors are largely useless (except the clone 6 calculation)
