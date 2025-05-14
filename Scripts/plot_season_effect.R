@@ -1,5 +1,6 @@
 # JUST VI OVER TIME 
-
+source('./Scripts/_PACKAGES.R')
+source('./Scripts/_FUNCTIONS.R')
 season <- bind_rows(lapply(1:17, function(x){
 VI <- dependent_vars[x]
 mod <- readRDS(paste0('./models/',VI,'_poly2.rds'))
