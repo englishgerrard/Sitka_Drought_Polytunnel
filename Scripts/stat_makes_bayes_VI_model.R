@@ -9,9 +9,10 @@ index <- read.csv('./Data/Index.csv') %>%
 data <- index
 data$treatment <- as.factor(data$treatment)
 data$clone <- factor(data$clone, labels = c('c1', 'c2','c3','c4','c5','c6'))
-#contrasts(data$clone) <- contr.sum(levels(data$clone))
+contrasts(data$clone) <- contr.sum(levels(data$clone))
 data$days_scaled <- drop(scale(data$days))
 
+dependent_vars <- dependent_vars[c(9,10)]
 
 fit_model <- function(dependent_var, priors) {
   # Create the formula for the model
@@ -26,7 +27,7 @@ fit_model <- function(dependent_var, priors) {
     chains = 4,
     iter = 4000,
     cores = 8,
-    file = paste0('./models/',dependent_var,'_poly_diff_contr.rds'),
+    file = paste0('./models/',dependent_var,'_poly2.rds'),
     
     #silent = TRUE
   )

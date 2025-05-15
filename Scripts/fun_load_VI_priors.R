@@ -11,8 +11,8 @@ priors_list <- list(
 
   ARI1 = c(set_prior("normal(0, 2)", class = "b"), set_prior("normal(0, 2)", class = "sd")),
   ARI2 = c(set_prior("normal(0, 2)", class = "b"), set_prior("normal(0, 2)", class = "sd")),
-  CRI1 = c(set_prior("normal(6.5, 5)", class = "b"), set_prior("normal(0, 5)", class = "sd")),    # test
-  CRI2 = c(set_prior("normal(6.5, 5)", class = "b"), set_prior("normal(0, 5)", class = "sd")),    # test
+  CRI1 = c(set_prior("normal(5, 6)", class = "b"), set_prior("normal(0, 6)", class = "sd")),    # test chnaed 5 to 2
+  CRI2 = c(set_prior("normal(5, 6)", class = "b"), set_prior("normal(0, 6)", class = "sd")),    # test
   PRI = c(set_prior("normal(0.2, 0.08)", class = "b"), set_prior("normal(0, 0.2)", class = "sd")),     # test
 
   MSI = c(set_prior("normal(0.3, 0.2)", class = "b"), set_prior("normal(0, 0.2)", class = "sd")),     # test

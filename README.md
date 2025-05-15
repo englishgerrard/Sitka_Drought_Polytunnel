@@ -3,6 +3,14 @@
 reproducing work in thesis for publication. Updated/ new scripts in this respority along with analysis of recovery data
 
 
+# script order
+pre processing
+
+`fun_load__priors` <- great a list of priors for models
+`stat_makes_bayes_VI_model` <- runs models  
+`get_generate_posteriors` <- save pos distrubutions (creates clone 6 coef)
+
+
 ## maybe i lose this observation in analysis
 indexx <- index %>% filter(days != 49 | treatment != 'D' | clone != 1564 | clone_num != 'd')
 

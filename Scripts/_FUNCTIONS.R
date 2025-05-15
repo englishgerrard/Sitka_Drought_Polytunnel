@@ -35,3 +35,94 @@ data_long <- data_frame(treatment = rep(data$treatment, times = 17),
                                   data$NDWI1, data$NDWI2,
                                   data$SRWI, data$WI,
                                   data$WI_NDVI))
+
+
+####### function to get lines 
+# i = 1 the moddle lines 
+# i - 2 the contrast lines (T diff from C)
+get_em_treat_days_clone <- function(x =1, num.contrast = 8, i = 1){
+  VI <- dependent_vars[x]
+  mod <- readRDS(paste0('./models/',VI,'_poly2.rds'))
+  fe <- read.csv(paste0('./Data/VI/',VI,'_fixed_effects2.csv'))
+  ps <- readRDS(paste0('./Data/VI/',VI,'_posterior_samples2.rds'))
+  
+  
+  em_week <- emmeans(
+    mod, 
+    specs = pairwise ~ treatment | days_scaled | clone,
+    at = list(days_scaled = seq(min(data$days_scaled), 
+                                max(data$days_scaled), 
+                                length = num.contrast))  
+  )
+  
+  
+  df1 <- as.data.frame(em_week$emmeans) %>%
+    mutate(VI =dependent_vars[x] ) %>%
+    mutate(VI_type = ifelse(x %in% 1:5, 'Green', ifelse(x %in% 6:11, 'Pigment', 'Water')))
+  
+  df2 <- as.data.frame(em_week$contrasts ) %>%
+    mutate(VI =dependent_vars[x] ) %>%
+    mutate(lower.HPD.80 = summary(em_week$contrasts, level = 0.80)$lower.HPD) %>%
+    mutate(upper.HPD.80 = summary(em_week$contrasts, level = 0.80)$upper.HPD) %>%
+    mutate(lower.HPD.85 = summary(em_week$contrasts, level = 0.85)$lower.HPD) %>%
+    mutate(upper.HPD.85 = summary(em_week$contrasts, level = 0.85)$upper.HPD) %>%
+    mutate(lower.HPD.90 = summary(em_week$contrasts, level = 0.9)$lower.HPD) %>%
+    mutate(upper.HPD.90 = summary(em_week$contrasts, level = 0.9)$upper.HPD) %>%
+    mutate(lower.HPD.95 = summary(em_week$contrasts, level = 0.95)$lower.HPD) %>%
+    mutate(upper.HPD.95 = summary(em_week$contrasts, level = 0.95)$upper.HPD) %>%
+    mutate(lower.HPD.957 = summary(em_week$contrasts, level = 0.975)$lower.HPD) %>%
+    mutate(upper.HPD.957 = summary(em_week$contrasts, level = 0.975)$upper.HPD) %>%
+    mutate(lower.HPD.99 = summary(em_week$contrasts, level = 0.99)$lower.HPD) %>%
+    mutate(upper.HPD.99 = summary(em_week$contrasts, level = 0.99)$upper.HPD) %>%
+    mutate(VI_type = ifelse(x %in% 1:5, 'Green', ifelse(x %in% 6:11, 'Pigment', 'Water')))
+  if(i == 1)
+  {return(df1)}
+  {return(df2)}
+}
+
+# i = 1 the moddle lines 
+# i - 2 the contrast lines (T diff from C)
+get_em_treat_days <- function(x =1, num.contrast = 8, i = 1){
+  VI <- dependent_vars[x]
+  mod <- readRDS(paste0('./models/',VI,'_poly2.rds'))
+  fe <- read.csv(paste0('./Data/VI/',VI,'_fixed_effects2.csv'))
+  ps <- readRDS(paste0('./Data/VI/',VI,'_posterior_samples2.rds'))
+  
+  
+  em_week <- emmeans(
+    mod, 
+    specs = pairwise ~ treatment | days_scaled,
+    at = list(days_scaled = seq(min(data$days_scaled), 
+                                max(data$days_scaled), 
+                                length = num.contrast))  
+  )
+  
+ summary(em_week$contrasts, level = 0.9)$lower.HPD
+  
+  df1 <- as.data.frame(em_week$emmeans) %>%
+    mutate(VI =dependent_vars[x] ) %>%
+    mutate(VI_type = ifelse(x %in% 1:5, 'Green', ifelse(x %in% 6:11, 'Pigment', 'Water')))
+  
+
+  df2 <- as.data.frame(em_week$contrasts ) %>%
+    mutate(lower.HPD.80 = summary(em_week$contrasts, level = 0.80)$lower.HPD) %>%
+    mutate(upper.HPD.80 = summary(em_week$contrasts, level = 0.80)$upper.HPD) %>%
+    mutate(lower.HPD.85 = summary(em_week$contrasts, level = 0.85)$lower.HPD) %>%
+    mutate(upper.HPD.85 = summary(em_week$contrasts, level = 0.85)$upper.HPD) %>%
+    mutate(lower.HPD.90 = summary(em_week$contrasts, level = 0.9)$lower.HPD) %>%
+    mutate(upper.HPD.90 = summary(em_week$contrasts, level = 0.9)$upper.HPD) %>%
+    mutate(lower.HPD.95 = summary(em_week$contrasts, level = 0.95)$lower.HPD) %>%
+    mutate(upper.HPD.95 = summary(em_week$contrasts, level = 0.95)$upper.HPD) %>%
+    mutate(lower.HPD.957 = summary(em_week$contrasts, level = 0.975)$lower.HPD) %>%
+    mutate(upper.HPD.957 = summary(em_week$contrasts, level = 0.975)$upper.HPD) %>%
+    mutate(lower.HPD.99 = summary(em_week$contrasts, level = 0.99)$lower.HPD) %>%
+    mutate(upper.HPD.99 = summary(em_week$contrasts, level = 0.99)$upper.HPD) %>%
+    mutate(VI =dependent_vars[x] ) %>%
+    mutate(VI_type = ifelse(x %in% 1:5, 'Green', ifelse(x %in% 6:11, 'Pigment', 'Water')))
+  
+  
+  
+  if(i == 1)if(i == 1)if(i == 1)
+  {return(df1)}
+  {return(df2)}
+}
