@@ -1,4 +1,8 @@
 # JUST VI OVER TIME 
+source('./Scripts/_PACKAGES.R')
+source('./Scripts/_FUNCTIONS.R')
+
+
 
 treatment <- bind_rows(lapply(1:17, function(x){
   VI <- dependent_vars[x]
@@ -31,7 +35,7 @@ p1 <- ggplot(treatment, aes(x = estimate_mean, y = VI , colour = contains_zero))
   # and for only second order - the effect is not uni directional over the expereimnt
   
  
-  treatment_clone <- bind_rows(lapply(1:17, function(x){
+  treatment_clone <- bind_rows(lapply(1:dv_l, function(x){
     VI <- dependent_vars[x]
     mod <- readRDS(paste0('./models/',VI,'_poly_diff_contr.rds'))
     fe <- read.csv(paste0('./Data/VI/',VI,'_fixed_effects.csv'))
@@ -56,7 +60,7 @@ p2 <-  ggplot(treatment_clone, aes(x = estimate_mean, y = model_term , colour = 
   ### so this is the effect of each clone realtive to the control
   
   
-  non_clone <- bind_rows(lapply(1:17, function(x){
+  non_clone <- bind_rows(lapply(1:dv_l, function(x){
     VI <- dependent_vars[x]
     mod <- readRDS(paste0('./models/',VI,'_poly2.rds'))
     fe <- read.csv(paste0('./Data/VI/',VI,'_fixed_effects2.csv'))
