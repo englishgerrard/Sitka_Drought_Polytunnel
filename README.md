@@ -14,6 +14,16 @@ pre processing
 ## maybe i lose this observation in analysis
 indexx <- index %>% filter(days != 49 | treatment != 'D' | clone != 1564 | clone_num != 'd')
 
+# VI secection 
+removed some VI from thesis to simplify discussion.
+choice is based on in Zhang and Zhou 2019 - they selcted 
+"In this study, we utilized four spectral vegetation indices (VIs), 
+which are indirectly related with canopy water, NDVI, NRred edge, CIgreen, and CIred edge,
+and six water-sensitive spectral VIs including WI, MSI, SRWI, NDWI, NDWI1640, and NDWI2130"
+i added stress pigement VI (ARIm CCI and PRI) and replced NDWI2130 with WI/NDVI
+
+
+
 
 
 # notes

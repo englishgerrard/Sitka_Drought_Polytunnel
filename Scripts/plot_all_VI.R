@@ -8,7 +8,7 @@ ave_data_long<- data_long %>%
             se_value = sd(value, na.rm = TRUE) / sqrt(n())) 
 
 
-lines <- bind_rows(lapply(1:17, get_em_treat_days_clone, num.contrast = 8, i = 1))
+lines <- bind_rows(lapply(1:dv_l, get_em_treat_days_clone, num.contrast = 8, i = 1))
 green_lines <- lines %>% filter(VI_type == 'Green')
 pigment_lines <- lines %>% filter(VI_type == 'Pigment')
 water_lines <- lines %>% filter(VI_type == 'Water')
