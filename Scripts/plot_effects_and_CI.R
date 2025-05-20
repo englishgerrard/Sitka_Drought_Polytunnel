@@ -3,8 +3,7 @@ source('./Scripts/_PACKAGES.R')
 source('./Scripts/_FUNCTIONS.R')
 
 
-  
-  non_clone <- bind_rows(lapply(1:dv_l, function(x){
+estimates <- bind_rows(lapply(1:dv_l, function(x){
     VI <- dependent_vars[x]
     mod <- readRDS(paste0('./models/',VI,'_poly2.rds'))
     fe <- read.csv(paste0('./Data/VI/',VI,'_fixed_effects2.csv'))
@@ -28,7 +27,7 @@ source('./Scripts/_FUNCTIONS.R')
   }))
 
   # Adjust levels and labels for model_term
-  non_clone$model_term <- factor(non_clone$model_term, 
+  estimates$model_term <- factor(estimates$model_term, 
                                        levels = c("b_polydays_scaled21", "b_polydays_scaled22",
                                                   "b_treatmentD:polydays_scaled21","b_treatmentD:polydays_scaled22",
                                                   "b_treatmentD:polydays_scaled21:clone1", "b_treatmentD:polydays_scaled22:clone1",
@@ -45,26 +44,30 @@ source('./Scripts/_FUNCTIONS.R')
                                                   'Clone 4 (linear)', 'C4. (quad.)',
                                                   'Clone 5 (linear)', 'C5. (quad.)',
                                                   'Clone 6 (linear)', 'C6. (quad.)'))   
-  alpha = 0.1
+alpha = 0.1
 plot_estimates <- function(VI.type = 'Green'){
-  ggplot(filter(non_clone, VI_type==VI.type), aes(x = estimate_mean, y = factor(model_term,
+  ggplot(filter(estimates, VI_type==VI.type), aes(x = estimate_mean, y = factor(model_term,
                                                     levels = rev(levels(model_term)))) )+
 
-  geom_rect(aes(xmin = -Inf, xmax = Inf, ymin = 2.5, ymax = 4.5), 
+  geom_rect(aes(xmin = -Inf, xmax = Inf, ymin = 12.5, ymax = 14.5), 
             fill = "lightblue", alpha = alpha) + 
-  geom_rect(aes(xmin = -Inf, xmax = Inf, ymin = 6.5, ymax = 8.5), 
+  geom_rect(aes(xmin = -Inf, xmax = Inf, ymin = 8.5, ymax = 10.5), 
             fill = "lightblue", alpha = alpha) + 
-  geom_rect(aes(xmin = -Inf, xmax = Inf, ymin = 10.5, ymax = 12.5), 
+  geom_rect(aes(xmin = -Inf, xmax = Inf, ymin = 4.5, ymax = 6.5), 
             fill = "lightblue", alpha = alpha) + 
-  geom_rect(aes(xmin = -Inf, xmax = Inf, ymin = 14.5, ymax = 16.5), 
-            fill = "lightblue", alpha = alpha) + 
+    geom_rect(aes(xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = 2.5), 
+              fill = "lightblue", alpha = alpha) + 
+  
   geom_vline(xintercept = 0, linetype = 2, alpha = 0.5) +
     
     facet_wrap(~VI, scales = "free_x") +
     geom_errorbarh(aes(xmin = lower, xmax = upper), height  =0.2) + 
   geom_point(aes(
-    colour = contains_zero)) +.    
-  theme_bw()}
+    colour = contains_zero)) +
+  theme_bw()+
+    theme(legend.position = "none",
+          axis.title.y = element_blank()) +
+   labs(x = 'Standardised effect on VI (± 95% CI) ')}
 
 plot_estimates('Green')
 plot_estimates('Pigment')  

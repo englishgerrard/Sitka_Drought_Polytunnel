@@ -43,6 +43,9 @@ data_long <- data_frame(treatment = rep(data$treatment, times = dv_l),
                                   data$SRWI, data$WI,
                                   data$WI_NDVI))
 
+add_VI_type <- function(x = x){ifelse(x %in% 1:4, 'Green', ifelse(x %in% 5:8, 'Pigment', 'Water'))
+  
+}
 
 ####### function to get lines 
 # i = 1 the moddle lines 

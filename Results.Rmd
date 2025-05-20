@@ -1,0 +1,24 @@
+---
+title: "results"
+output: html_document
+date: "2025-05-20"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source('Scripts/_PACKAGES.R')
+source('Scripts/_FUNCTIONS.R')
+
+source('./Scripts/plot_effects_and_CI.R')
+
+```
+
+
+```{r}
+plot_estimates('Green')
+plot_estimates('Pigment')  
+plot_estimates('Water')  
+```
+
+
+
