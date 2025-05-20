@@ -18,7 +18,7 @@ ggplot(filter(cont, VI_type == 'Green'), aes(x = days_scaled, y = estimate, fill
   geom_hline(yintercept = 0) +
   facet_wrap(~VI, scales = 'free_y') +
   theme_bw()+
-  theme(aspect.ratio = 1)
+  theme(aspect.ratio = 1) 
 
 ggplot(filter(cont, VI_type == 'Pigment'), aes(x = days_scaled, y = estimate, fill = VI )) +
   geom_ribbon(aes(ymin=lower.HPD.85, ymax = upper.HPD.85), alpha = alpha) +
