@@ -63,7 +63,7 @@ plot_estimates <- function(VI.type = 'Green'){
     facet_wrap(~VI, scales = "free_x") +
     geom_errorbarh(aes(xmin = lower, xmax = upper), height  =0.2) + 
   geom_point(aes(
-    colour = contains_zero)) +
+    colour = contains_zero)) +.    
   theme_bw()}
 
 plot_estimates('Green')
